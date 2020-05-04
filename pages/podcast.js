@@ -3,15 +3,15 @@ import slug from '../helpers/slug';
 
 export default class extends React.Component{
 
-  // static async getInitialProps({ query }){
-  //   let response = await fetch(`https://api.audioboom.com/audio_clips/${query.id}.mp3`);
-  //   let data = await response.json();   
-  //   let dataAudio = data.body.audio_clip;
-  //   return {dataAudio};
-  // }
+  static async getInitialProps({ query }){
+    let response = await fetch(`https://api.audioboom.com/audio_clips/${query.id}.mp3`);
+    let data = await response.json();   
+    let dataAudio = data.body.audio_clip;
+    return {dataAudio};
+  }
 
   render(){
-    const { dataAudio, onClose } = this.props;
+    const { dataAudio } = this.props;
     return(
       <>
         <header>Podcasts</header>
@@ -19,7 +19,7 @@ export default class extends React.Component{
           <div className='clip'>
             <nav>
               <Link href={`/channel?id=${dataAudio.channel.id}`} as={`/${slug(dataAudio.channel.title)}`}>
-                <a className='close' onClick={onClose}>&lt; Volver</a>
+                <a className='close'>&lt; Volver</a>
               </Link>
             </nav>
 
